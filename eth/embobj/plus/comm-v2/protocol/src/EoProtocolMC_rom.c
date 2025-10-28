@@ -378,12 +378,13 @@ static EOPROT_ROMmap EOnv_rom_t eoprot_mc_rom_descriptor_joint_status_addinfo_mu
 };
 
 
+//TODO: (MSECode -> modify by renaming correctly the nv following the struct name
 static EOPROT_ROMmap EOnv_rom_t eoprot_mc_rom_descriptor_joint_status_debug =
 {   
-    EO_INIT(.capacity)  sizeof(eoprot_mc_rom_joint_defaultvalue.status.debug),
+    EO_INIT(.capacity)  sizeof(eoprot_mc_rom_joint_defaultvalue.status.rawinfo),
     EO_INIT(.rwmode)    eoprot_rwm_mc_joint_status_debug,
     EO_INIT(.dummy)     0,    
-    EO_INIT(.resetval)  (const void*)&eoprot_mc_rom_joint_defaultvalue.status.debug,
+    EO_INIT(.resetval)  (const void*)&eoprot_mc_rom_joint_defaultvalue.status.rawinfo,
 #ifdef EOPROT_CFG_OVERRIDE_CALLBACKS_IN_RUNTIME
     EO_INIT(.init)      NULL,
     EO_INIT(.update)    NULL
