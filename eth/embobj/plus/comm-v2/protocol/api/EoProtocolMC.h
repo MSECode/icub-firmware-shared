@@ -86,7 +86,7 @@ typedef enum
     eoprot_tag_mc_joint_status_core_modes_controlmodestatus         = 12,
     eoprot_tag_mc_joint_status_core_modes_interactionmodestatus     = 13,
     eoprot_tag_mc_joint_status_core_modes_ismotiondone              = 14,
-    eoprot_tag_mc_joint_status_addinfo_multienc                     = 15,
+    eoprot_tag_mc_joint_status_rawinfo                              = 15,
     eoprot_tag_mc_joint_status_debug                                = 16,
     eoprot_tag_mc_joint_inputs                                      = 17,
     eoprot_tag_mc_joint_inputs_externallymeasuredtorque             = 18,
@@ -122,7 +122,7 @@ typedef enum
     eoprot_rwm_mc_joint_status_core_modes_controlmodestatus         = eo_nv_rwmode_RO,
     eoprot_rwm_mc_joint_status_core_modes_interactionmodestatus     = eo_nv_rwmode_RO,
     eoprot_rwm_mc_joint_status_core_modes_ismotiondone              = eo_nv_rwmode_RO,
-    eoprot_rwm_mc_joint_status_addinfo_multienc                     = eo_nv_rwmode_RO,
+    eoprot_rwm_mc_joint_status_rawinfo                              = eo_nv_rwmode_RO,
     eoprot_rwm_mc_joint_status_debug                                = eo_nv_rwmode_RO,
     eoprot_rwm_mc_joint_inputs                                      = eo_nv_rwmode_RW,
     eoprot_rwm_mc_joint_inputs_externallymeasuredtorque             = eo_nv_rwmode_RW,
@@ -298,8 +298,8 @@ extern void eoprot_fun_UPDT_mc_joint_status_core_modes_interactionmodestatus(con
 extern void eoprot_fun_INIT_mc_joint_status_core_modes_ismotiondone(const EOnv* nv);
 extern void eoprot_fun_UPDT_mc_joint_status_core_modes_ismotiondone(const EOnv* nv, const eOropdescriptor_t* rd);
 
-extern void eoprot_fun_INIT_mc_joint_status_addinfo_multienc(const EOnv* nv);
-extern void eoprot_fun_UPDT_mc_joint_status_addinfo_multienc(const EOnv* nv, const eOropdescriptor_t* rd);
+extern void eoprot_fun_INIT_mc_joint_status_rawinfo(const EOnv* nv);
+extern void eoprot_fun_UPDT_mc_joint_status_rawinfo(const EOnv* nv, const eOropdescriptor_t* rd);
 
 extern void eoprot_fun_INIT_mc_joint_status_debug(const EOnv* nv);
 extern void eoprot_fun_UPDT_mc_joint_status_debug(const EOnv* nv, const eOropdescriptor_t* rd);

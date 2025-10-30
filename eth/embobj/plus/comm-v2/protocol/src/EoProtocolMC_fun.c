@@ -236,12 +236,12 @@ EO_weak extern void eoprot_fun_INIT_mc_joint_status_core_modes_ismotiondone(cons
 EO_weak extern void eoprot_fun_UPDT_mc_joint_status_core_modes_ismotiondone(const EOnv* nv, const eOropdescriptor_t* rd) {}
 #endif    
 
-#if !defined(OVERRIDE_eoprot_fun_INIT_mc_joint_status_addinfo_multienc)
-EO_weak extern void eoprot_fun_INIT_mc_joint_status_addinfo_multienc(const EOnv* nv) {}
+#if !defined(OVERRIDE_eoprot_fun_INIT_mc_joint_status_rawinfo)
+EO_weak extern void eoprot_fun_INIT_mc_joint_status_rawinfo(const EOnv* nv) {}
 #endif
 
-#if !defined(OVERRIDE_eoprot_fun_UPDT_mc_joint_status_addinfo_multienc)
-EO_weak extern void eoprot_fun_UPDT_mc_joint_status_addinfo_multienc(const EOnv* nv, const eOropdescriptor_t* rd) {}
+#if !defined(OVERRIDE_eoprot_fun_UPDT_mc_joint_status_rawinfo)
+EO_weak extern void eoprot_fun_UPDT_mc_joint_status_rawinfo(const EOnv* nv, const eOropdescriptor_t* rd) {}
 #endif 
     
 #if !defined(OVERRIDE_eoprot_fun_INIT_mc_joint_status_debug)

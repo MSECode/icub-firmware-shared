@@ -938,39 +938,46 @@ typedef struct                  // size is:  4+4+4+4+4+4+4 = 28
 } eOmc_joint_status_target_t;   EO_VERIFYsizeof(eOmc_joint_status_target_t, 28) 
 
 
-enum{ eOmc_joint_multienc_maxnum = 3};
-//typedef struct              //size is 4*3 = 12
-//{
-//    eOmeas_position_t   listofenc[eOmc_joint_multiEnc_maxnum];
-//} eOmc_joint_multipleEncoders_t;
+// TODO:modify struct to union starts here
 
-typedef struct              //size is = 12
+enum{ eOmc_encoder_on_device_maxnumberof = 3}; // max number of encoder per device
+typedef struct                  // size is 4+4 = 8
 {
-    //eOmc_joint_multipleEncoders_t multienc;
-    eOmeas_position_t   multienc[eOmc_joint_multienc_maxnum];
-} eOmc_joint_status_additionalInfo_t;  EO_VERIFYsizeof(eOmc_joint_status_additionalInfo_t, 12) 
+    int32_t     encoder_value;
+    int32_t     encoder_diagnostic;
+} eOmc_encoder_raw_data_t; EO_VERIFYsizeof(eOmc_encoder_raw_data_t, 8)
 
-typedef struct             // size is 16
+typedef struct                  // size is 8+8+8 = 24
 {
-    int32_t     primary_encoder;
-    int32_t     secondary_encoder;
-    int32_t     auxiliary_encoder;
-    uint8_t     free_buffer[4];
-} eOmc_joint_status_rawInfo_t; EO_VERIFYsizeof(eOmc_joint_status_rawInfo_t, 16)
+    eOmc_encoder_raw_data_t     primary_encoder;
+    eOmc_encoder_raw_data_t     secondary_encoder;
+    eOmc_encoder_raw_data_t     auxiliary_encoder;
+} eOmc_device_raw_info_encoder_data_t; EO_VERIFYsizeof(eOmc_device_raw_info_encoder_data_t, 24)
+
+/** @typedef    typedef union eOmc_joint_status_rawInfo_t
+    @brief      eOmc_joint_status_rawInfo_t specifies a "joint" (joint for now but it should be intended for any encoder equipped device) raw info with multiple encoders
+ **/
+typedef union                  // size is 8*3=24
+{
+    uint64_t                                                    any[3];
+    eOmc_device_raw_info_encoder_data_t                         rawInfoEncoderData;
+} eOmc_joint_status_rawinfo_t;           EO_VERIFYsizeof(eOmc_joint_status_rawinfo_t, 24)
+
 
 
 /** @typedef    typedef struct eOmc_joint_status_t
     @brief      eOmc_joint_status_t contains the status of a joint
  **/
-typedef struct                  // size is:  40+28+12+16 = 96
+typedef struct                  // size is:  40+28+24+16 = 108 + compiler padding
 {
-    eOmc_joint_status_core_t            core;
-    eOmc_joint_status_target_t          target;
-    eOmc_joint_status_additionalInfo_t  addinfo;
-    eOmc_joint_status_rawInfo_t         rawinfo;
-} eOmc_joint_status_t;         EO_VERIFYsizeof(eOmc_joint_status_t, 96) 
+    eOmc_joint_status_core_t            core;      // 40 bytes
+    eOmc_joint_status_target_t          target;    // 28 bytes
+    eOmc_joint_status_rawinfo_t         rawinfo;   // 24 bytes
+    uint8_t                             debug[16]; // 16 bytes
+    // uint8_t                             filler[4]; // 4 bytes padding to match actual struct size
+} eOmc_joint_status_t;         EO_VERIFYsizeof(eOmc_joint_status_t, 112) 
 
-
+// TODO:modify struct to union ends here
 
 /** @typedef    typedef struct eOmc_joint_commands_t
     @brief      contains the possible commands set to a joint
@@ -989,13 +996,13 @@ typedef struct                  // size is 28+12+1+1+1+1+0 = 44
 /** @typedef    typedef struct eOmc_joint_t
     @brief      contains the whole joint
  **/
-typedef struct                  // size is 236+96+4+44+0 = 380
+typedef struct                  // size is 248+112+4+44+0 = 408
 {   
     eOmc_joint_config_t         config;                     /**< the configuration of the joint */
     eOmc_joint_status_t         status;                     /**< the status of the joint */
     eOmc_joint_inputs_t         inputs;                     /**< it contains all the values that a host can send to a joint as inputs */
     eOmc_joint_commands_t       cmmnds;                     /**< it contains all the commands that a host can send to a joint */
-} eOmc_joint_t;                 EO_VERIFYsizeof(eOmc_joint_t, 392);
+} eOmc_joint_t;                 EO_VERIFYsizeof(eOmc_joint_t, 408);
 
 
 
